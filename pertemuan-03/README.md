@@ -11,14 +11,14 @@
 - Hasil pengujian POST: [GitHub Pages menolak permintaan POST atau menampilkan respons galat karena tidak tersedia
 pemrosesan sisi peladen yaitu berisi 405 Not Allowed]
 ## CSS Dasar
-- Selector elemen: [tuliskan]
+- Selector elemen: [Pada pertemuan P3 ini tidak ada yang langsung memakai Selector Elemen pada css]
 - Selector class: [.form-group, .input-form]
-- Selector ID: [#about, #about h2, #about h3, #about p, #about ol, #contact, #contact h2, #contact labe, #contact button]
+- Selector ID: [#about, #about h2, #about h3, #about p, #about ol, #contact, #contact h2, #contact label, #contact button]
 - Properti CSS dasar yang digunakan: [color, background-color, border, padding, margin, font-family, border-bottom, padding-bottom, margin-bottom, font-weigth, font-size]
 ## Pengujian dan Perbaikan
-- Galat yang ditemukan: [tuliskan jika ada]
-- Penyebab galat: [tuliskan]
-- Perbaikan yang dilakukan: [tuliskan]
-- Hasil pengujian ulang: [tuliskan]
+- Galat yang ditemukan: [tidak ada kecuali pembelajaran pada modul untuk mencoba method="post"]
+- Penyebab galat: [tidak ada kecuali pembelajaran pada modul untuk mencoba method="post", kenapa method="post" tidak muncul pada URL, karena GitHub Pages adalah hosting statis, sehingga data formulir tidak diproses oleh server]
+- Perbaikan yang dilakukan: [kembalikan method="post" menjadi method="get" seperti yang diajarkan di modul p3]
+- Hasil pengujian ulang: [setelah di kembalikan menjadi method="get" dan mencoba mengisi kembali form di web, setelah submit, amati query string dan perubahan pada URL]
 ## GitHub Pages
 URL: [tempel URL GitHub Pages Pertemuan 3]
