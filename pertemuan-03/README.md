@@ -21,4 +21,4 @@ pemrosesan sisi peladen yaitu berisi 405 Not Allowed]
 - Perbaikan yang dilakukan: [kembalikan method="post" menjadi method="get" seperti yang diajarkan di modul p3]
 - Hasil pengujian ulang: [setelah di kembalikan menjadi method="get" dan mencoba mengisi kembali form di web, setelah submit, amati query string dan perubahan pada URL]
 ## GitHub Pages
-URL: [tempel URL GitHub Pages Pertemuan 3]
+URL: [https://willyandreansyah.github.io/2611500009-PWD-TI1A-2627O/pertemuan-03/]
