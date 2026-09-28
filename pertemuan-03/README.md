@@ -8,7 +8,8 @@
 ## Pengujian GET dan POST
 - Hasil pengujian GET: [https://willyandreansyah.github.io/2611500009-PWD-TI1A-2627O/pertemuan-03/index.html?nama=Willy+Andreansyah&email=2611500009%40mahasiswa.atmaluhur.ac.id&semester=1&tanggal=2026-09-28&jenis_pesan=saran&minat=HTML&minat=CSS&prodi=TI&pesan=Terima+Kasih+Pak]
 - Contoh URL encoding yang ditemukan: [?nama=Willy+Andreansyah, &email=2611500009%40mahasiswa.atmaluhur.ac.id, &semester=1, &tanggal=2026-09-28, &jenis_pesan=saran, &minat=HTML&minat=CSS, &prodi=TI, &pesan=Terima+Kasih+Pak]
-- Hasil pengujian POST: [tuliskan]
+- Hasil pengujian POST: [GitHub Pages menolak permintaan POST atau menampilkan respons galat karena tidak tersedia
+pemrosesan sisi peladen yaitu berisi 405 Not Allowed]
 ## CSS Dasar
 - Selector elemen: [tuliskan]
 - Selector class: [.form-group, .input-form]
