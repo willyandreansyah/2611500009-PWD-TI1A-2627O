@@ -43,7 +43,7 @@ nav a {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
 }
 
@@ -198,5 +198,4 @@ footer p {
     #contact {
         grid-column: 1 / -1;
     }
-    
 }
