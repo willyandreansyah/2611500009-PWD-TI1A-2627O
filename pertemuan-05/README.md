@@ -8,7 +8,7 @@ navigasi, dan validasi formulir sisi klien.
 diberikan, contohnya yaitu `const jenisPesan = document.querySelector('input[name="jenis_pesan"]:checked');`.
 - `querySelectorAll()`: Metode `querySelectorAll()` digunakan untuk memilih beberapa elemen HTML yang sesuai dengan selector
 CSS yang diberikan, contohnya yaitu `const topikDipilih = document.querySelectorAll('input[name="minat"]:checked');`.
-- `addEventListener()`: Metode `addEventListener()` digunakan untuk mendaftarkan event listener pada suatu elemen HTML, sintaks dasar yaitu `elemen.addEventListener("nama-event", fungsi);`
+- `addEventListener()`: Metode `addEventListener()` digunakan untuk mendaftarkan event listener pada suatu elemen HTML, sintaks dasar yaitu `elemen.addEventListener("nama-event", fungsi);`.
 ## Pengujian
 - `getElementById()`: Langkahnya yaitu buka `index.html` di browser pada lebar layar kecil (< 768px), lalu klik tombol ☰ (`navToggle`). Klik sekali lagi untuk menutup. Hasil aktualnya yaitu Elemen `navToggle` dan `navMenu` berhasil diambil lewat Id, menu navigasi tampil saat tombol diklik, dan tersembunyi saat diklik lagi, atribut `aria-expanded` dan `aria-label` ikut berubah ("Buka navigasi" dan "Tutup navigasi").
 - `querySelector()`: Langkahnya yaitu isi seluruh form kecuali "Jenis Pesan" lalu klik Kirim, kemudian pilih salah satu radio button dan klik Kirim lagi. Hasil aktualnya yaitu tanpa pilihan, muncul pesan merah "Pilih jenis pesan." karena `querySelector('input[name="jenis_pesan"]:checked')` mengembalikan `null`, setelah salah satu radio dipilih, elemen terpilih ditemukan dan validasi lanjut ke tahap berikutnya.
