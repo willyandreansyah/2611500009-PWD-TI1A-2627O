@@ -243,6 +243,8 @@ footer p {
         flex-direction: row;
     }
 
-    
+    .nav-toggle {
+        display: none;
+    }
 
 }
