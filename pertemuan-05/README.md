@@ -3,12 +3,17 @@
 Dokumentasi pengembangan halaman web pada P5, meliputi JavaScript, DOM, event listener, interaksi
 navigasi, dan validasi formulir sisi klien.
 ## Fitur dan Pengembangan
-`getElementById()`: Fungsinya untuk mencari dan mengambil (memilih) satu elemen HTML berdasarkan atribut id, contohnya: `const navToggle = document.getElementById("navToggle");`.
-`querySelector()`: Metode `querySelector()` digunakan untuk memilih satu elemen HTML berdasarkan selector CSS yang
-diberikan, contohnya: `const jenisPesan = document.querySelector('input[name="jenis_pesan"]:checked');`.
-`querySelectorAll()`: Metode querySelectorAll() digunakan untuk memilih beberapa elemen HTML yang sesuai dengan selector
+`getElementById()`:
+- Fungsinya untuk mencari dan mengambil (memilih) satu elemen HTML berdasarkan atribut id, contohnya: `const navToggle = document.getElementById("navToggle");`.
+`querySelector()`:
+- Metode `querySelector()` digunakan untuk memilih satu elemen HTML berdasarkan selector CSS yang
+diberikan, contohnya:
+- `const jenisPesan = document.querySelector('input[name="jenis_pesan"]:checked');`.
+`querySelectorAll()`:
+- Metode querySelectorAll() digunakan untuk memilih beberapa elemen HTML yang sesuai dengan selector
 CSS yang diberikan, contohnya: `const topikDipilih = document.querySelectorAll('input[name="minat"]:checked');`.
-`addEventListener()`: Metode addEventListener() digunakan untuk mendaftarkan event listener pada suatu elemen HTML, sintaks dasar: `elemen.addEventListener("nama-event", fungsi);`
+`addEventListener()`:
+- Metode addEventListener() digunakan untuk mendaftarkan event listener pada suatu elemen HTML, sintaks dasar: `elemen.addEventListener("nama-event", fungsi);`
 ## Pengujian
 `getElementById()`:
 - Langkah: Buka `index.html` di browser pada lebar layar kecil (< 768px), lalu klik tombol ☰ (`navToggle`). Klik sekali lagi untuk menutup.
@@ -24,5 +29,6 @@ CSS yang diberikan, contohnya: `const topikDipilih = document.querySelectorAll('
 - Hasil aktual: Event `submit` mencegah reload dan menampilkan pesan error merah atau pesan sukses hijau "Form berhasil divalidasi." Event `input` dan `reset` menghapus pesan feedback.
 ## Riwayat Pengembangan
 Catat perkembangan melalui commit Git yang bermakna.
-[Pesan commit]: [Ringkasan perubahan dan hasil pengujiannya.]
+membuat file javascript eksternal dan menghubungkannya ke HTML:
+- Membuat `script.js` dan menghubungkannya ke `index.html` dengan `<script src="script.js"></script>`.
 [Pesan commit]: [Ringkasan perubahan dan hasil pengujiannya.]
