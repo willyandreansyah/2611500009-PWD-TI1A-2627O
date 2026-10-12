@@ -15,3 +15,5 @@ if (topikDipilih.length === 0) {
 const namaInput = document.getElementById("nama");
 const emailInput = document.getElementById("email");
 const semesterInput = document.getElementById("semester");
+const formFeedback = document.getElementById("formFeedback");
+formFeedback.textContent = "Form berhasil divalidasi.";
