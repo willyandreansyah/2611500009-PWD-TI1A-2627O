@@ -17,3 +17,9 @@ const emailInput = document.getElementById("email");
 const semesterInput = document.getElementById("semester");
 const formFeedback = document.getElementById("formFeedback");
 formFeedback.textContent = "Form berhasil divalidasi.";
+
+const isOpen = navMenu.classList.toggle("nav-open");
+
+navToggle.addEventListener("click", () => {
+ console.log("Tombol navigasi diklik.");
+});
