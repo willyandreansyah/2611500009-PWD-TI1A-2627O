@@ -13,18 +13,11 @@ CSS yang diberikan, contohnya: `const topikDipilih = document.querySelectorAll('
 - `getElementById()`: Langkah: Buka `index.html` di browser pada lebar layar kecil (< 768px), lalu klik tombol ☰ (`navToggle`). Klik sekali lagi untuk menutup, Hasil aktual: Elemen `navToggle` dan `navMenu` berhasil diambil lewat Id. Menu navigasi tampil saat tombol diklik, dan tersembunyi saat diklik lagi. Atribut `aria-expanded` dan `aria-label` ikut berubah ("Buka navigasi" dan "Tutup navigasi").
 - `querySelector()`: Langkah: Isi seluruh form kecuali "Jenis Pesan", lalu klik Kirim. Kemudian pilih salah satu radio button dan klik Kirim lagi, Hasil aktual: Tanpa pilihan, muncul pesan merah "Pilih jenis pesan." karena `querySelector('input[name="jenis_pesan"]:checked')` mengembalikan `null`. Setelah salah satu radio dipilih, elemen terpilih ditemukan dan validasi lanjut ke tahap berikutnya.
 - `querySelectorAll()`: Langkah: Isi form lainnya tanpa mencentang topik minat, lalu klik Kirim. Setelah itu centang HTML atau CSS dan klik Kirim lagi, Hasil aktual: Tanpa centang, `querySelectorAll('input[name="minat"]:checked')` menghasilkan daftar kosong (`length === 0`) sehingga muncul pesan "Pilih minimal satu topik yang diminati." Dengan minimal satu centang, validasi lolos.
-- `addEventListener()`:
-- Langkah: Klik Kirim dengan data tidak valid, lalu dengan data valid, kemudian ketik di salah satu input dan klik Batal.
-- Hasil aktual: Event `submit` mencegah reload dan menampilkan pesan error merah atau pesan sukses hijau "Form berhasil divalidasi." Event `input` dan `reset` menghapus pesan feedback.
+- `addEventListener()`: Langkah: Klik Kirim dengan data tidak valid, lalu dengan data valid, kemudian ketik di salah satu input dan klik Batal, Hasil aktual: Event `submit` mencegah reload dan menampilkan pesan error merah atau pesan sukses hijau "Form berhasil divalidasi." Event `input` dan `reset` menghapus pesan feedback.
 ## Riwayat Pengembangan
 Catat perkembangan melalui commit Git yang bermakna.
-`membuat file javascript eksternal dan menghubungkannya ke HTML`:
-- Membuat `script.js` dan menghubungkannya ke `index.html` dengan `<script src="script.js"></script>`.
-`menambahkan menu button baru di HTML dengan class nav-toogle untuk membuat hamburger menu`:
-- Menambahkan `<button class="nav-toggle" id="navToggle">` di `header` dan `id="navMenu"` pada daftar navigasi.
-`menambahkan css untuk hamburger menu dan yang lainnya`:
-- Menambahkan gaya untuk hamburger menu (`.nav-toggle`, `#navMenu`, `.nav-open`), media query untuk layar ≥ 768px, serta gaya form dan pesan feedback.
-`mengisi JavaScript untuk logic pemrograman seperti getElementById, addEventListener - querySelector - querySelectorAll`:
-- Mengisi `script.js` dengan `getElementById()`, `addEventListener()`, `querySelector()`, dan `querySelectorAll()` untuk menu navigasi dan validasi form.
-`mengisi readme untuk dokumentasi`:
-- Menulis dokumentasi perubahan dan pengujian.
+- `membuat file javascript eksternal dan menghubungkannya ke HTML`: Membuat `script.js` dan menghubungkannya ke `index.html` dengan `<script src="script.js"></script>`.
+- `menambahkan menu button baru di HTML dengan class nav-toogle untuk membuat hamburger menu`: Menambahkan `<button class="nav-toggle" id="navToggle">` di `header` dan `id="navMenu"` pada daftar navigasi.
+- `menambahkan css untuk hamburger menu dan yang lainnya`: Menambahkan gaya untuk hamburger menu (`.nav-toggle`, `#navMenu`, `.nav-open`), media query untuk layar ≥ 768px, serta gaya form dan pesan feedback.
+- `mengisi JavaScript untuk logic pemrograman seperti getElementById, addEventListener - querySelector - querySelectorAll`: Mengisi `script.js` dengan `getElementById()`, `addEventListener()`, `querySelector()`, dan `querySelectorAll()` untuk menu navigasi dan validasi form.
+- `mengisi readme untuk dokumentasi`: Menulis dokumentasi perubahan dan pengujian.
