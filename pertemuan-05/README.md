@@ -20,4 +20,3 @@ Catat perkembangan melalui commit Git yang bermakna.
 - `menambahkan menu button baru di HTML dengan class nav-toogle untuk membuat hamburger menu`: Menambahkan `<button class="nav-toggle" id="navToggle">` di `header` dan `id="navMenu"` pada daftar navigasi.
 - `menambahkan css untuk hamburger menu dan yang lainnya`: Menambahkan gaya untuk hamburger menu (`.nav-toggle`, `#navMenu`, `.nav-open`), media query untuk layar ≥ 768px, serta gaya form dan pesan feedback.
 - `mengisi JavaScript untuk logic pemrograman seperti getElementById, addEventListener - querySelector - querySelectorAll`: Mengisi `script.js` dengan `getElementById()`, `addEventListener()`, `querySelector()`, dan `querySelectorAll()` untuk menu navigasi dan validasi form.
-- `mengisi readme untuk dokumentasi`: Menulis dokumentasi perubahan dan pengujian.
