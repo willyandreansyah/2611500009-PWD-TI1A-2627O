@@ -29,6 +29,10 @@ CSS yang diberikan, contohnya: `const topikDipilih = document.querySelectorAll('
 - Hasil aktual: Event `submit` mencegah reload dan menampilkan pesan error merah atau pesan sukses hijau "Form berhasil divalidasi." Event `input` dan `reset` menghapus pesan feedback.
 ## Riwayat Pengembangan
 Catat perkembangan melalui commit Git yang bermakna.
-membuat file javascript eksternal dan menghubungkannya ke HTML:
+`membuat file javascript eksternal dan menghubungkannya ke HTML`:
 - Membuat `script.js` dan menghubungkannya ke `index.html` dengan `<script src="script.js"></script>`.
-[Pesan commit]: [Ringkasan perubahan dan hasil pengujiannya.]
+`menambahkan menu button baru di HTML dengan class nav-toogle untuk membuat hamburger menu`:
+- Menambahkan `<button class="nav-toggle" id="navToggle">` di `header` dan `id="navMenu"` pada daftar navigasi.
+`menambahkan css untuk hamburger menu dan yang lainnya`:
+- Menambahkan gaya untuk hamburger menu (`.nav-toggle`, `#navMenu`, `.nav-open`), media query untuk layar ≥ 768px, serta gaya form dan pesan feedback.
+``
