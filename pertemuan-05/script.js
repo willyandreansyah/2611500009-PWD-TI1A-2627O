@@ -1,6 +1,3 @@
-const navToggle = document.getElementById("navToggle");
-const navMenu = document.getElementById("navMenu");
-
 navToggle.addEventListener("click", () => {
     const isOpen = navMenu.classList.toggle("nav-open");
     navToggle.setAttribute("aria-expanded", isOpen);
@@ -11,6 +8,8 @@ navToggle.addEventListener("click", () => {
     }
 });
 
+const navToggle = document.getElementById("navToggle");
+const navMenu = document.getElementById("navMenu");
 const contactForm = document.getElementById("contactForm");
 const formFeedback = document.getElementById("formFeedback");
 const namaInput = document.getElementById("nama");
