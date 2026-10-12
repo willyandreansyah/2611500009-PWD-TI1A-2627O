@@ -11,3 +11,7 @@ const topikDipilih = document.querySelectorAll('input[name="minat"]:checked');
 if (topikDipilih.length === 0) {
     // Proses validasi ketika belum ada topik yang dipilih.
 }
+
+const namaInput = document.getElementById("nama");
+const emailInput = document.getElementById("email");
+const semesterInput = document.getElementById("semester");
