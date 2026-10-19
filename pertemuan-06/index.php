@@ -90,12 +90,11 @@ switch ($programStudi) {
                 <p>Program Studi: <?php echo $namaProdi . " (" . $programStudi . ")"; ?></p>
                 <p>Fokus program studi: <?php echo $fokusProgramStudi; ?></p>
                 <p>Status mahasiswa: <?php echo $statusAktif ? "Aktif" : "Tidak aktif"; ?></p>
+                <p>Semester: <?php echo $semester . " (" . $keteranganSemester . ")"; ?></p>
                 <p>Sisa semester hingga batas: <?php echo $sisaSemester; ?></p>
                 <p>Pemeriksaan rentang semester: <?php echo $statusSemester; ?></p>
                 <p>IPK: <?php echo number_format($ipk, 2, ',', '.'); ?></p>
                 <p>Catatan tambahan: <?php echo $catatanTambahan === null ? "Belum ada" : $catatanTambahan; ?></p>
-                <p>Semester: <?php echo $semester . " (" . $keteranganSemester . ")"; ?></p>
-                <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
 
                 <h3>Target Belajar (Perulangan for)</h3>
 
