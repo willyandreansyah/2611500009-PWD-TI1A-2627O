@@ -92,6 +92,7 @@ switch ($programStudi) {
                 <p>Status mahasiswa: <?php echo $statusAktif ? "Aktif" : "Tidak aktif"; ?></p>
                 <p>Sisa semester hingga batas: <?php echo $sisaSemester; ?></p>
                 <p>Pemeriksaan rentang semester: <?php echo $statusSemester; ?></p>
+                <p>IPK: <?php echo number_format($ipk, 2, ',', '.'); ?></p>
                 <p>Semester: <?php echo $semester . " (" . $keteranganSemester . ")"; ?></p>
                 <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
 
