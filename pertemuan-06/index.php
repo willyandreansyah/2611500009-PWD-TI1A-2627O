@@ -98,7 +98,7 @@ switch ($programStudi) {
                 <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
 
                 <h3>Target Belajar (Perulangan for)</h3>
-                
+
                 <ol>
                     <?php
                     // Perulangan for tanpa array; materi larik dibahas pada P9.
@@ -147,7 +147,7 @@ switch ($programStudi) {
                 <a target="_blank" href="https://github.com/<?= PROFIL_GITHUB ?>">profil GitHub saya</a>.
             </p>
 
-            <form id="contactForm" action="index.html" method="get" novalidate>
+            <form id="contactForm" action="index.php" method="get" novalidate>
 
                 <div class="form-group">
                     <label for="nama">Nama Lengkap</label><br>
