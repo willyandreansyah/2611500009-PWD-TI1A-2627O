@@ -48,7 +48,9 @@ const PROFIL_GITHUB = "willyandreansyah";
     <main>
         <section id="home">
             <h2>Selamat Datang</h2>
-            <p>Halo saya Willy Andreansyah. Saya sedang mempelajari Pemrograman Web Dasar.</p>
+            <p>Halo, saya <strong><?php echo $namaMahasiswa; ?></strong>. Saya sedang mempelajari matakuliah
+                <strong><?php print NAMA_MATA_KULIAH; ?></strong> pada tahun akademik <?php echo $tahunAkademik; ?>.
+            </p>
             <img src="img/foto-profil.jpg" alt="Foto profil Willy Andreansyah" width="120" height="160">
         </section>
 
@@ -69,7 +71,10 @@ const PROFIL_GITHUB = "willyandreansyah";
 
         <section id="contact">
             <h2>Kontak</h2>
-            <p>Kunjungi <a href="https://github.com/willyandreansyah">profil GitHub saya</a>.</p>
+            <p>
+                Kunjungi
+                <a target="_blank" href="https://github.com/<?= PROFIL_GITHUB ?>">profil GitHub saya</a>.
+            </p>
 
             <form id="contactForm" action="index.html" method="get" novalidate>
 
