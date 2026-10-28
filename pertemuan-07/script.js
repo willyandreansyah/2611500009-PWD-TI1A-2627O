@@ -22,7 +22,6 @@ const pesanInput = document.getElementById("pesan");
 
 contactForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    formFeedback.className = "form-feedback-error";
 
     const nama = namaInput.value.trim();
     if (nama.length < 3 || nama.length > 50) {
@@ -83,6 +82,7 @@ contactForm.addEventListener("submit", (event) => {
 
     formFeedback.textContent = "Form berhasil divalidasi.";
     formFeedback.className = "form-feedback-success";
+    formFeedback.className = "form-feedback-error";
     contactForm.submit();
 });
 

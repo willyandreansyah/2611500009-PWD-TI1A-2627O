@@ -2,19 +2,17 @@
 session_start();
 
 // P7: penggunaan POST
-if (isset($_POST['nama'])) {
-    $nama = trim((string) ($_POST['nama'] ?? ''));
-    $email = trim((string) ($_POST['email'] ?? ''));
-    $semesterForm = trim((string) ($_POST['semester'] ?? ''));
-    $jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? ''));
-    $prodi = trim((string) ($_POST['prodi'] ?? ''));
-    $pesan = trim((string) ($_POST['pesan'] ?? ''));
-    $tanggal = trim((string) ($_POST['tanggal'] ?? ''));
-    $minat = $_POST['minat'] ?? [];
-    echo "Nama yang diterima: " . htmlspecialchars($nama, ENT_QUOTES, 'UTF-8');
-}
+$nama = trim((string) ($_POST['nama'] ?? ''));
+$email = trim((string) ($_POST['email'] ?? ''));
+$semesterForm = trim((string) ($_POST['semester'] ?? ''));
+$jenisPesan = trim((string) ($_POST['jenis_pesan'] ?? ''));
+$prodi = trim((string) ($_POST['prodi'] ?? ''));
+$pesan = trim((string) ($_POST['pesan'] ?? ''));
+$tanggal = trim((string) ($_POST['tanggal'] ?? ''));
+$minat = $_POST['minat'] ?? [];
 
 $pesanKesalahan = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (trim($nama ?? '') === '') {
         $pesanKesalahan .= 'Nama lengkap wajib diisi. ';
@@ -66,7 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!in_array($prodi, ['SI', 'TI'], true)) {
         $pesanKesalahan .= 'Program studi tidak valid. ';
     }
+
     $minatDiizinkan = ['HTML', 'CSS'];
+
     if (!is_array($minat)) {
         $pesanKesalahan .= 'Format pilihan topik tidak valid. ';
     } else {
@@ -150,17 +150,6 @@ $pesan = $_SESSION['pesan'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="id">
-
-<?php if ($pesanKesalahan !== ''): ?>
-    <p class="form-feedback-error">
-        <?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
-    </p>
-    <?php
-    unset(
-        $_SESSION['pesanKesalahan']
-    );
-    ?>
-<?php endif; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -263,6 +252,12 @@ $pesan = $_SESSION['pesan'] ?? '';
                 <p class="form-feedback-error">
                     <?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
                 </p>
+                
+                <?php
+                unset(
+                    $_SESSION['pesanKesalahan']
+                );
+                ?>
             <?php endif; ?>
 
             <p>
