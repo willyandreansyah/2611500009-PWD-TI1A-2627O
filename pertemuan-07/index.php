@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // P7: penggunaan POST
 if (isset($_POST['nama'])) {
     $nama = trim((string) ($_POST['nama'] ?? ''));
@@ -11,6 +13,7 @@ if (isset($_POST['nama'])) {
     $minat = $_POST['minat'] ?? [];
     echo "Nama yang diterima: " . htmlspecialchars($nama, ENT_QUOTES, 'UTF-8');
 }
+
 $pesanKesalahan = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (trim($nama ?? '') === '') {
@@ -37,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($minat)) {
         $pesanKesalahan .= 'Minat wajib dipilih minimal satu. ';
     }
+
     if (trim($semesterForm) !== '') {
         $semesterValid = filter_var(
             $semesterForm,
@@ -50,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pesanKesalahan .= 'Semester harus berupa bilangan bulat antara 1 dan 14. ';
         }
     }
+
     if (trim($email) !== '') {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $pesanKesalahan .= 'Format email tidak valid. ';
@@ -116,9 +121,46 @@ switch ($programStudi) {
     default:
         $fokusProgramStudi = "Belum ditentukan";
 }
+
+// P7
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['pesanKesalahan'] = $pesanKesalahan;
+    $_SESSION['nama'] = $nama;
+    $_SESSION['email'] = $email;
+    $_SESSION['semester'] = $semesterForm;
+    $_SESSION['tanggal'] = $tanggal;
+    $_SESSION['jenis_pesan'] = $jenisPesan;
+    $_SESSION['prodi'] = $prodi;
+    $_SESSION['minat'] = $minat;
+    $_SESSION['pesan'] = $pesan;
+    header('Location: index.php');
+    exit;
+}
+
+$pesanKesalahan = $_SESSION['pesanKesalahan'] ?? '';
+$nama = $_SESSION['nama'] ?? '';
+$email = $_SESSION['email'] ?? '';
+$semesterForm = $_SESSION['semester'] ?? '';
+$tanggal = $_SESSION['tanggal'] ?? date("Y-m-d");
+$jenisPesan = $_SESSION['jenis_pesan'] ?? '';
+$prodi = $_SESSION['prodi'] ?? '';
+$minat = $_SESSION['minat'] ?? '';
+$pesan = $_SESSION['pesan'] ?? '';
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
+<?php if ($pesanKesalahan !== ''): ?>
+    <p class="form-feedback-error">
+        <?= htmlspecialchars($pesanKesalahan, ENT_QUOTES, 'UTF-8') ?>
+    </p>
+    <?php
+    unset(
+        $_SESSION['pesanKesalahan']
+    );
+    ?>
+<?php endif; ?>
 
 <head>
     <meta charset="UTF-8">
@@ -289,7 +331,7 @@ switch ($programStudi) {
 
             </form>
 
-            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+            <?php if (!empty($nama)): ?>
                 <h3>Data yang Diterima Peladen</h3>
                 <p>Nama:
                     <?= htmlspecialchars($nama, ENT_QUOTES, 'UTF-8') ?>
