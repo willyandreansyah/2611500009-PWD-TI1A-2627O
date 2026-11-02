@@ -192,15 +192,19 @@ switch ($programStudi) {
 				</div>
 
 				<div class="form-group">
-					<label for="semester">Semester</label><br />
+					<label for="tanggalpelaksanaan">Tanggal Pelaksanaan</label><br />
 
-					<input class="input-form" type="number" id="semester" name="semester" min="1" max="14" required />
+					<input class="input-form" type="date" id="tanggalpelaksanaan" name="tanggalpelaksanaan" required />
 				</div>
 
 				<div class="form-group">
-					<label for="tanggal">Tanggal Kunjungan</label><br />
+					<label for="prodi">Program Studi</label><br />
 
-					<input class="input-form" type="date" id="tanggal" name="tanggal" required />
+					<select class="input-form" id="prodi" name="prodi" required>
+						<option value="">-- Pilih Program Studi --</option>
+						<option value="SI">Sistem Informasi</option>
+						<option value="TI">Teknik Informatika</option>
+					</select>
 				</div>
 
 				<div class="form-group">
@@ -221,16 +225,6 @@ switch ($programStudi) {
 
 					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" />
 					<label for="minat-css">CSS</label>
-				</div>
-
-				<div class="form-group">
-					<label for="prodi">Program Studi</label><br />
-
-					<select class="input-form" id="prodi" name="prodi" required>
-						<option value="">-- Pilih Program Studi --</option>
-						<option value="SI">Sistem Informasi</option>
-						<option value="TI">Teknik Informatika</option>
-					</select>
 				</div>
 
 				<div class="form-group">
