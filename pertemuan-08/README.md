@@ -8,4 +8,5 @@
 5. Membuat formulir untuk tanggal pelaksanaan
 6. Membuat formulir untuk lokasi kegiatan
 7. Membuat formulir untuk deskripsi kegiatan
-8. menambahkan css untuk form rencana kegiatan
+8. Menambahkan css untuk form rencana kegiatan
+9. Menambahkan variabel POST dan SESSION baru untuk rencana kegiatan

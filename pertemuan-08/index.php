@@ -3,42 +3,41 @@ session_start();
 
 // P7: Memproses data formulir dan menyimpannya ke dalam session.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-	$nama = trim((string) ($_POST["nama"] ?? ""));
-	$email = trim((string) ($_POST["email"] ?? ""));
-	$semesterForm = trim((string) ($_POST["semester"] ?? ""));
-	$tanggal = trim((string) ($_POST["tanggal"] ?? ""));
-	$jenisPesan = trim((string) ($_POST["jenis_pesan"] ?? ""));
-	$minat = $_POST["minat"] ?? [];
-	$prodi = trim((string) ($_POST["prodi"] ?? ""));
-	$pesan = trim((string) ($_POST["pesan"] ?? ""));
-	$namaKegiatan = trim((string) ($_POST["namakegiatan"] ?? ""));
-	$kategoriKegiatan = trim((string) ($_POST["kategorikegiatan"] ?? ""));
-	$tanggalPelaksanaan = trim((string) ($_POST["tanggalpelaksanaan"] ?? ""));
-	$lokasiKegiatan = trim((string) ($_POST["lokasikegiatan"] ?? ""));
-	$deskripsiKegiatan = trim((string) ($_POST["deskripsikegiatan"] ?? ""));
+	// Menentukan formulir mana yang dikirim melalui input tersembunyi "form_type".
+	$formType = trim((string) ($_POST["form_type"] ?? ""));
 
-	// Checkbox dapat mengirimkan lebih dari satu nilai.
-	if (!is_array($minat)) {
-		$minat = [];
+	if ($formType === "rencanakegiatan") {
+		// Formulir Rencana Kegiatan: hanya menyimpan data kegiatan.
+		$_SESSION["namakegiatan"] = trim((string) ($_POST["namakegiatan"] ?? ""));
+		$_SESSION["kategorikegiatan"] = trim((string) ($_POST["kategorikegiatan"] ?? ""));
+		$_SESSION["tanggalpelaksanaan"] = trim((string) ($_POST["tanggalpelaksanaan"] ?? ""));
+		$_SESSION["lokasikegiatan"] = trim((string) ($_POST["lokasikegiatan"] ?? ""));
+		$_SESSION["deskripsikegiatan"] = trim((string) ($_POST["deskripsikegiatan"] ?? ""));
+
+		$anchor = "rencanakegiatan";
+	} else {
+		// Formulir Kontak: hanya menyimpan data kontak.
+		$minat = $_POST["minat"] ?? [];
+
+		// Checkbox dapat mengirimkan lebih dari satu nilai.
+		if (!is_array($minat)) {
+			$minat = [];
+		}
+
+		$_SESSION["nama"] = trim((string) ($_POST["nama"] ?? ""));
+		$_SESSION["email"] = trim((string) ($_POST["email"] ?? ""));
+		$_SESSION["semester"] = trim((string) ($_POST["semester"] ?? ""));
+		$_SESSION["tanggal"] = trim((string) ($_POST["tanggal"] ?? ""));
+		$_SESSION["jenis_pesan"] = trim((string) ($_POST["jenis_pesan"] ?? ""));
+		$_SESSION["minat"] = $minat;
+		$_SESSION["prodi"] = trim((string) ($_POST["prodi"] ?? ""));
+		$_SESSION["pesan"] = trim((string) ($_POST["pesan"] ?? ""));
+
+		$anchor = "contact";
 	}
 
-	// Menyimpan setiap nilai formulir ke dalam session secara terpisah.
-	$_SESSION["nama"] = $nama;
-	$_SESSION["email"] = $email;
-	$_SESSION["semester"] = $semesterForm;
-	$_SESSION["tanggal"] = $tanggal;
-	$_SESSION["jenis_pesan"] = $jenisPesan;
-	$_SESSION["minat"] = $minat;
-	$_SESSION["prodi"] = $prodi;
-	$_SESSION["pesan"] = $pesan;
-	$_SESSION["namakegiatan"] = $pesan;
-	$_SESSION["kategorikegiatan"] = $pesan;
-	$_SESSION["tanggalpelaksanaan"] = $pesan;
-	$_SESSION["lokasikegiatan"] = $pesan;
-	$_SESSION["deskripsikegiatan	"] = $pesan;
-
 	// PRG: mencegah pengiriman POST berulang ketika halaman dimuat ulang.
-	header("Location: index.php#contact");
+	header("Location: index.php#" . $anchor);
 	exit;
 }
 
@@ -189,6 +188,7 @@ switch ($programStudi) {
 			<h2>Rencana Kegiatan Mahasiswa</h2>
 
 			<form id="rencanakegiatanForm" class="js-rencanakegiatan-form" data-validation="rencanakegiatan" action="index.php" method="post" novalidate>
+				<input type="hidden" name="form_type" value="rencanakegiatan" />
 
 				<div class="form-group">
 					<label for="namakegiatan">Nama Kegiatan</label><br />
@@ -233,19 +233,14 @@ switch ($programStudi) {
 				<p class="form-feedback" data-form-feedback aria-live="polite"></p>
 			</form>
 
-			<?php if (isset($_SESSION["nama"])): ?>
-				<article id="hasilKontak" class="submission-result" aria-live="polite">
+			<?php if (isset($_SESSION["namakegiatan"])): ?>
+				<article id="hasilRencanakegiatan" class="submission-result" aria-live="polite">
 					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Lengkap:</strong> <?= htmlspecialchars($_SESSION["nama"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Email:</strong> <?= htmlspecialchars($_SESSION["email"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Semester:</strong> <?= htmlspecialchars($_SESSION["semester"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Tanggal Kunjungan:</strong> <?= htmlspecialchars($_SESSION["tanggal"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Jenis Pesan:</strong> <?= htmlspecialchars($_SESSION["jenis_pesan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Topik yang Diminati:</strong>
-						<?= htmlspecialchars(implode(", ", $_SESSION["minat"] ?? []), ENT_QUOTES, "UTF-8") ?>
-					</p>
-					<p><strong>Program Studi:</strong> <?= htmlspecialchars($_SESSION["prodi"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Pesan:</strong> <?= nl2br(htmlspecialchars($_SESSION["pesan"] ?? "", ENT_QUOTES, "UTF-8")) ?></p>
+					<p><strong>Nama Kegiatan:</strong> <?= htmlspecialchars($_SESSION["namakegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
+					<p><strong>Kategori Kegiatan:</strong> <?= htmlspecialchars($_SESSION["kategorikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
+					<p><strong>Tanggal Pelaksanaan:</strong> <?= htmlspecialchars($_SESSION["tanggalpelaksanaan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
+					<p><strong>Lokasi Kegiatan:</strong> <?= htmlspecialchars($_SESSION["lokasikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
+					<p><strong>Deskripsi Kegiatan:</strong> <?= htmlspecialchars($_SESSION["deskripsikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
 				</article>
 			<?php endif; ?>
 		</section>
@@ -259,6 +254,8 @@ switch ($programStudi) {
 			</p>
 
 			<form id="contactForm" class="js-contact-form" data-validation="contact" action="index.php" method="post" novalidate>
+				<input type="hidden" name="form_type" value="contact" />
+
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label><br />
 

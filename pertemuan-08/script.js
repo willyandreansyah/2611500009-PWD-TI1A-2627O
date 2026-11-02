@@ -126,3 +126,81 @@ contactForms.forEach((contactForm) => {
     }
   });
 });
+
+// Validasi formulir Rencana Kegiatan.
+const rencanaForms = document.querySelectorAll(
+  'form[data-validation="rencanakegiatan"]',
+);
+ 
+rencanaForms.forEach((rencanaForm) => {
+  const formFeedback = rencanaForm.querySelector("[data-form-feedback]");
+ 
+  const ambilInput = (nama) => rencanaForm.elements.namedItem(nama);
+ 
+  const bersihkanPesan = () => {
+    if (formFeedback) {
+      formFeedback.textContent = "";
+      formFeedback.className = "form-feedback";
+    }
+  };
+ 
+  rencanaForm.addEventListener("submit", (event) => {
+    // Mencegah pengiriman otomatis sebelum seluruh validasi selesai.
+    event.preventDefault();
+ 
+    const namaKegiatanInput = ambilInput("namakegiatan");
+    const tanggalInput = ambilInput("tanggalpelaksanaan");
+    const lokasiInput = ambilInput("lokasikegiatan");
+    const deskripsiInput = ambilInput("deskripsikegiatan");
+    const kategoriDipilih = rencanaForm.querySelector(
+      'input[name="kategorikegiatan"]:checked',
+    );
+ 
+    const namaKegiatan = namaKegiatanInput.value.trim();
+    const tanggal = tanggalInput.value;
+    const lokasi = lokasiInput.value;
+    const deskripsi = deskripsiInput.value.trim();
+ 
+    const tampilkanKesalahan = (pesanKesalahan) => {
+      if (formFeedback) {
+        formFeedback.textContent = pesanKesalahan;
+        formFeedback.className = "form-feedback-error";
+      }
+    };
+ 
+    bersihkanPesan();
+ 
+    if (namaKegiatan.length < 3 || namaKegiatan.length > 50) {
+      tampilkanKesalahan("Nama kegiatan harus diisi 3 sampai 50 karakter.");
+      return;
+    }
+ 
+    if (!kategoriDipilih) {
+      tampilkanKesalahan("Pilih kategori kegiatan (Wajib atau Tidak Wajib).");
+      return;
+    }
+ 
+    if (tanggal === "") {
+      tampilkanKesalahan("Tanggal pelaksanaan harus diisi.");
+      return;
+    }
+ 
+    if (lokasi === "") {
+      tampilkanKesalahan("Pilih lokasi kegiatan.");
+      return;
+    }
+ 
+    if (deskripsi.length === 0 || deskripsi.length > 300) {
+      tampilkanKesalahan(
+        "Deskripsi kegiatan harus diisi dan maksimal 300 karakter.",
+      );
+      return;
+    }
+ 
+    // Mengirim formulir setelah seluruh validasi JavaScript berhasil.
+    rencanaForm.submit();
+  });
+ 
+  rencanaForm.addEventListener("reset", bersihkanPesan);
+  rencanaForm.addEventListener("input", bersihkanPesan);
+});
