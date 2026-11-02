@@ -198,13 +198,19 @@ switch ($programStudi) {
 				</div>
 
 				<div class="form-group">
-					<label for="prodi">Program Studi</label><br />
+					<label for="lokasikegiatan">Lokasi Kegiatan</label><br />
 
-					<select class="input-form" id="prodi" name="prodi" required>
-						<option value="">-- Pilih Program Studi --</option>
-						<option value="SI">Sistem Informasi</option>
-						<option value="TI">Teknik Informatika</option>
+					<select class="input-form" id="lokasikegiatan" name="lokasikegiatan" required>
+						<option value="">-- Pilih Lokasi Kegiatan --</option>
+						<option value="">Di Luar Kampus</option>
+						<option value="">DI Dalam Kampus</option>
 					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="pesan">Pesan</label><br />
+
+					<textarea class="input-form" id="pesan" name="pesan" maxlength="300" placeholder="Tulis pesan Anda" required></textarea>
 				</div>
 
 				<div class="form-group">
@@ -225,18 +231,6 @@ switch ($programStudi) {
 
 					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" />
 					<label for="minat-css">CSS</label>
-				</div>
-
-				<div class="form-group">
-					<label for="pesan">Pesan</label><br />
-
-					<textarea
-						class="input-form"
-						id="pesan"
-						name="pesan"
-						maxlength="300"
-						placeholder="Tulis pesan Anda"
-						required></textarea>
 				</div>
 
 				<button type="submit">Kirim</button>

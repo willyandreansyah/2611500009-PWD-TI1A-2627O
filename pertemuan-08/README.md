@@ -5,3 +5,4 @@
 2. Membuat section baru dengan id rencanakegiatan
 3. Membuat formulir untuk nama kegiatan
 4. Membuat formulir untuk kategori kegiatan
+5. Membuat formulir untuk tanggal pelaksanaan
