@@ -199,10 +199,10 @@ switch ($programStudi) {
 				<div class="form-group">
 					<p>Kategori Kegiatan</p>
 
-					<input type="radio" id="wajib" name="kategorikegiatan" value="wajib" required />
+					<input type="radio" id="wajib" name="kategorikegiatan" value="Wajib" required />
 					<label for="wajib">Wajib</label>
 
-					<input type="radio" id="tidakwajib" name="kategorikegiatan" value="tidakwajib" />
+					<input type="radio" id="tidakwajib" name="kategorikegiatan" value="Tidak Wajib" />
 					<label for="tidakwajib">Tidak Wajib</label>
 				</div>
 
@@ -217,8 +217,8 @@ switch ($programStudi) {
 
 					<select class="input-form" id="lokasikegiatan" name="lokasikegiatan" required>
 						<option value="">-- Pilih Lokasi Kegiatan --</option>
-						<option value="luar">Di Luar Kampus</option>
-						<option value="dalam">Di Dalam Kampus</option>
+						<option value="Di Luar Kampus">Di Luar Kampus</option>
+						<option value="Di Dalam Kampus">Di Dalam Kampus</option>
 					</select>
 				</div>
 
@@ -356,7 +356,7 @@ switch ($programStudi) {
 	<footer>
 		<p>&copy; <?= date("Y") ?> <?php echo $namaMahasiswa; ?> [<?= $nim ?>]</p>
 	</footer>
-	<script src="script.js"></script>
+	<script src="script.js?v=2"></script>
 </body>
 
 </html>

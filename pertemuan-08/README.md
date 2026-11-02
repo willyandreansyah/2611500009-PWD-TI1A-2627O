@@ -10,3 +10,6 @@
 7. Membuat formulir untuk deskripsi kegiatan
 8. Menambahkan css untuk form rencana kegiatan
 9. Menambahkan variabel POST dan SESSION baru untuk rencana kegiatan
+10. Menambahkan validasi js untuk rencana kegiatan mahasiswa
+11. Menguji formulir rencana kegiatan mahasiswa dan bisa mengirim form dengan metode POST
+12. Dokumentasi readme
