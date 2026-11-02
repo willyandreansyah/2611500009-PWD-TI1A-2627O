@@ -180,15 +180,15 @@ switch ($programStudi) {
 			<form id="contactForm" class="js-contact-form" data-validation="rencanakegiatan" action="index.php" method="post" novalidate>
 
 				<div class="form-group">
-					<label for="nama">Nama Kegiatan</label><br />
+					<label for="namakegiatan">Nama Kegiatan</label><br />
 
 					<input class="input-form" type="text" id="namakegiatan" name="namakegiatan" placeholder="Nama Kegiatan" minlength="3" maxlength="50" required />
 				</div>
 
 				<div class="form-group">
-					<label for="email">Email</label><br />
+					<label for="kategorikegiatan">Kategori Kegiatan</label><br />
 
-					<input class="input-form" type="email" id="email" name="email" placeholder="nama@email.com" required />
+					<input class="input-form" type="text" id="kategorikegiatan" name="kategorikegiatan" placeholder="Kategori Kegiatan" required />
 				</div>
 
 				<div class="form-group">
