@@ -186,9 +186,13 @@ switch ($programStudi) {
 				</div>
 
 				<div class="form-group">
-					<label for="kategorikegiatan">Kategori Kegiatan</label><br />
+					<p>Jenis Pesan</p>
 
-					<input class="input-form" type="text" id="kategorikegiatan" name="kategorikegiatan" placeholder="Kategori Kegiatan" required />
+					<input type="radio" id="pertanyaan" name="jenis_pesan" value="pertanyaan" required />
+					<label for="pertanyaan">Pertanyaan</label>
+
+					<input type="radio" id="saran" name="jenis_pesan" value="saran" />
+					<label for="saran">Saran</label>
 				</div>
 
 				<div class="form-group">
@@ -208,29 +212,9 @@ switch ($programStudi) {
 				</div>
 
 				<div class="form-group">
-					<label for="pesan">Pesan</label><br />
+					<label for="deskripsikegiatan">Deskripsi Kegiatan</label><br />
 
-					<textarea class="input-form" id="pesan" name="pesan" maxlength="300" placeholder="Tulis pesan Anda" required></textarea>
-				</div>
-
-				<div class="form-group">
-					<p>Jenis Pesan</p>
-
-					<input type="radio" id="pertanyaan" name="jenis_pesan" value="pertanyaan" required />
-					<label for="pertanyaan">Pertanyaan</label>
-
-					<input type="radio" id="saran" name="jenis_pesan" value="saran" />
-					<label for="saran">Saran</label>
-				</div>
-
-				<div class="form-group">
-					<p>Topik yang Diminati</p>
-
-					<input type="checkbox" id="minat-html" name="minat[]" value="HTML" />
-					<label for="minat-html">HTML</label>
-
-					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" />
-					<label for="minat-css">CSS</label>
+					<textarea class="input-form" id="deskripsikegiatan" name="deskripsikegiatan" maxlength="300" placeholder="Tulis pesan Anda" required></textarea>
 				</div>
 
 				<button type="submit">Kirim</button>
