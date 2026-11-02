@@ -7,3 +7,4 @@
 4. Membuat formulir untuk kategori kegiatan
 5. Membuat formulir untuk tanggal pelaksanaan
 6. Membuat formulir untuk lokasi kegiatan
+7. Membuat formulir untuk deskripsi kegiatan

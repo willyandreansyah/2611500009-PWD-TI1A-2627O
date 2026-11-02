@@ -83,7 +83,7 @@ switch ($programStudi) {
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Profil Mahasiswa</title>
-	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="style.css?v=2" />
 </head>
 
 <body>
@@ -107,6 +107,7 @@ switch ($programStudi) {
 				<li><a href="#home">Beranda</a></li>
 				<li><a href="#about">Tentang</a></li>
 				<li><a href="#contact">Kontak</a></li>
+				<li><a href="#rencanakegiatan">Rencana Kegiatan</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -177,7 +178,7 @@ switch ($programStudi) {
 		<section id="rencanakegiatan">
 			<h2>Rencana Kegiatan Mahasiswa</h2>
 
-			<form id="contactForm" class="js-contact-form" data-validation="rencanakegiatan" action="index.php" method="post" novalidate>
+			<form id="rencanakegiatanForm" class="js-rencanakegiatan-form" data-validation="rencanakegiatan" action="index.php" method="post" novalidate>
 
 				<div class="form-group">
 					<label for="namakegiatan">Nama Kegiatan</label><br />
@@ -186,13 +187,13 @@ switch ($programStudi) {
 				</div>
 
 				<div class="form-group">
-					<p>Jenis Pesan</p>
+					<p>Kategori Kegiatan</p>
 
-					<input type="radio" id="pertanyaan" name="jenis_pesan" value="pertanyaan" required />
-					<label for="pertanyaan">Pertanyaan</label>
+					<input type="radio" id="wajib" name="kategorikegiatan" value="wajib" required />
+					<label for="wajib">Wajib</label>
 
-					<input type="radio" id="saran" name="jenis_pesan" value="saran" />
-					<label for="saran">Saran</label>
+					<input type="radio" id="tidakwajib" name="kategorikegiatan" value="tidakwajib" />
+					<label for="tidakwajib">Tidak Wajib</label>
 				</div>
 
 				<div class="form-group">
@@ -206,8 +207,8 @@ switch ($programStudi) {
 
 					<select class="input-form" id="lokasikegiatan" name="lokasikegiatan" required>
 						<option value="">-- Pilih Lokasi Kegiatan --</option>
-						<option value="">Di Luar Kampus</option>
-						<option value="">DI Dalam Kampus</option>
+						<option value="luar">Di Luar Kampus</option>
+						<option value="dalam">Di Dalam Kampus</option>
 					</select>
 				</div>
 
