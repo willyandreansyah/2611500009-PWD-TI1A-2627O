@@ -3,47 +3,162 @@ session_start();
 
 include("fungsi.php");
 
-echo "<h1>hai disana</h1>";
-echo "<script>
-	alert('hai');
-	</script>";
+// Mengambil nilai teks dari $_POST (selalu string dan sudah di-trim).
+function ambilTeks(string $kunci): string
+{
+	$nilai = $_POST[$kunci] ?? "";
+	return is_scalar($nilai) ? trim((string) $nilai) : "";
+}
 
-echo bersihkan("<p>hai disana</p>");
-echo bersihkan("<script>
-	alert('hai');
-	</script>");
+// Memeriksa tanggal berformat Y-m-d yang benar-benar valid.
+function tanggalValid(string $tanggal): bool
+{
+	$d = DateTime::createFromFormat("Y-m-d", $tanggal);
+	return $d !== false && $d->format("Y-m-d") === $tanggal;
+}
 
-// P7/P8: Memproses data formulir dan menyimpannya ke dalam session.
+// Validasi sisi peladen PHP
+function validasiRencanaKegiatan(array $data): string
+{
+	$panjangNama = mb_strlen($data["namakegiatan"], "UTF-8");
+	if ($panjangNama < 3 || $panjangNama > 50) {
+		return "Nama kegiatan harus diisi 3 sampai 50 karakter.";
+	}
+
+	if (!in_array($data["kategorikegiatan"], ["Wajib", "Tidak Wajib"], true)) {
+		return "Pilih kategori kegiatan (Wajib atau Tidak Wajib).";
+	}
+
+	if ($data["tanggalpelaksanaan"] === "") {
+		return "Tanggal pelaksanaan harus diisi.";
+	}
+	if (!tanggalValid($data["tanggalpelaksanaan"])) {
+		return "Format tanggal pelaksanaan tidak valid.";
+	}
+
+	if (!in_array($data["lokasikegiatan"], ["Di Luar Kampus", "Di Dalam Kampus"], true)) {
+		return "Pilih lokasi kegiatan.";
+	}
+
+	$panjangDeskripsi = mb_strlen($data["deskripsikegiatan"], "UTF-8");
+	if ($panjangDeskripsi === 0 || $panjangDeskripsi > 300) {
+		return "Deskripsi kegiatan harus diisi dan maksimal 300 karakter.";
+	}
+
+	return "";
+}
+
+function validasiKontak(array $data): string
+{
+	$panjangNama = mb_strlen($data["nama"], "UTF-8");
+	if ($panjangNama < 3 || $panjangNama > 50) {
+		return "Nama lengkap harus diisi 3 sampai 50 karakter.";
+	}
+
+	if (!preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $data["email"]) || !filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+		return "Masukkan alamat email yang valid.";
+	}
+
+	$semester = filter_var($data["semester"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1, "max_range" => 14]]);
+	if ($data["semester"] === "" || $semester === false) {
+		return "Semester harus diisi dengan angka 1 sampai 14.";
+	}
+
+	if ($data["tanggal"] === "") {
+		return "Tanggal kunjungan harus diisi.";
+	}
+	if (!tanggalValid($data["tanggal"])) {
+		return "Format tanggal kunjungan tidak valid.";
+	}
+
+	if (!in_array($data["jenis_pesan"], ["pertanyaan", "saran"], true)) {
+		return "Pilih jenis pesan.";
+	}
+
+	if (count($data["minat"]) === 0) {
+		return "Pilih minimal satu topik yang diminati.";
+	}
+	foreach ($data["minat"] as $m) {
+		if (!in_array($m, ["HTML", "CSS"], true)) {
+			return "Topik yang diminati tidak valid.";
+		}
+	}
+
+	if (!in_array($data["prodi"], ["SI", "TI"], true)) {
+		return "Pilih program studi.";
+	}
+
+	$panjangPesan = mb_strlen($data["pesan"], "UTF-8");
+	if ($panjangPesan === 0 || $panjangPesan > 300) {
+		return "Pesan harus diisi dan maksimal 300 karakter.";
+	}
+
+	return "";
+}
+
+// ---------------------------------------------------------------
+// P7/P8/P9: Memproses data formulir dan menyimpannya ke dalam session.
+//   $_SESSION["kegiatan"]         = data Rencana Kegiatan yang valid (array)
+//   $_SESSION["kontak"]           = data Kontak yang valid (array)
+//   $_SESSION["galat"]["kegiatan"] / ["kontak"] = pesan kesalahan (sekali tampil)
+// ---------------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	// Menentukan formulir mana yang dikirim melalui input tersembunyi "form_type".
-	$formType = trim((string) ($_POST["form_type"] ?? ""));
+	$formType = ambilTeks("form_type");
+	$anchor = "home";
 
 	if ($formType === "rencanakegiatan") {
-		// Formulir Rencana Kegiatan: hanya menyimpan data kegiatan.
-		$_SESSION["namakegiatan"] = trim((string) ($_POST["namakegiatan"] ?? ""));
-		$_SESSION["kategorikegiatan"] = trim((string) ($_POST["kategorikegiatan"] ?? ""));
-		$_SESSION["tanggalpelaksanaan"] = trim((string) ($_POST["tanggalpelaksanaan"] ?? ""));
-		$_SESSION["lokasikegiatan"] = trim((string) ($_POST["lokasikegiatan"] ?? ""));
-		$_SESSION["deskripsikegiatan"] = trim((string) ($_POST["deskripsikegiatan"] ?? ""));
+		// Formulir Rencana Kegiatan: hanya memproses data kegiatan.
+		$data = [
+			"namakegiatan"       => ambilTeks("namakegiatan"),
+			"kategorikegiatan"   => ambilTeks("kategorikegiatan"),
+			"tanggalpelaksanaan" => ambilTeks("tanggalpelaksanaan"),
+			"lokasikegiatan"     => ambilTeks("lokasikegiatan"),
+			"deskripsikegiatan"  => ambilTeks("deskripsikegiatan"),
+		];
+
+		$galat = validasiRencanaKegiatan($data);
+
+		if ($galat === "") {
+			$_SESSION["kegiatan"] = $data;
+			unset($_SESSION["galat"]["kegiatan"]);
+		} else {
+			$_SESSION["galat"]["kegiatan"] = $galat;
+		}
 
 		$anchor = "rencanakegiatan";
-	} else {
-		// Formulir Kontak: hanya menyimpan data kontak.
+	} elseif ($formType === "contact") {
+		// Formulir Kontak: hanya memproses data kontak.
 		$minat = $_POST["minat"] ?? [];
 
 		// Checkbox dapat mengirimkan lebih dari satu nilai.
 		if (!is_array($minat)) {
 			$minat = [];
 		}
+		$minat = array_values(array_filter(array_map(
+			static fn($m) => is_scalar($m) ? trim((string) $m) : "",
+			$minat
+		), static fn($m) => $m !== ""));
 
-		$_SESSION["nama"] = trim((string) ($_POST["nama"] ?? ""));
-		$_SESSION["email"] = trim((string) ($_POST["email"] ?? ""));
-		$_SESSION["semester"] = trim((string) ($_POST["semester"] ?? ""));
-		$_SESSION["tanggal"] = trim((string) ($_POST["tanggal"] ?? ""));
-		$_SESSION["jenis_pesan"] = trim((string) ($_POST["jenis_pesan"] ?? ""));
-		$_SESSION["minat"] = $minat;
-		$_SESSION["prodi"] = trim((string) ($_POST["prodi"] ?? ""));
-		$_SESSION["pesan"] = trim((string) ($_POST["pesan"] ?? ""));
+		$data = [
+			"nama"        => ambilTeks("nama"),
+			"email"       => ambilTeks("email"),
+			"semester"    => ambilTeks("semester"),
+			"tanggal"     => ambilTeks("tanggal"),
+			"jenis_pesan" => ambilTeks("jenis_pesan"),
+			"minat"       => $minat,
+			"prodi"       => ambilTeks("prodi"),
+			"pesan"       => ambilTeks("pesan"),
+		];
+
+		$galat = validasiKontak($data);
+
+		if ($galat === "") {
+			$_SESSION["kontak"] = $data;
+			unset($_SESSION["galat"]["kontak"]);
+		} else {
+			$_SESSION["galat"]["kontak"] = $galat;
+		}
 
 		$anchor = "contact";
 	}
@@ -52,6 +167,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	header("Location: index.php#" . $anchor);
 	exit;
 }
+
+// echo "<h1>hai disana</h1>";
+// echo "<script>
+// 	alert('hai');
+// 	</script>";
+
+// echo bersihkan("<p>hai disana</p>");
+// echo bersihkan("<script>
+// 	alert('hai');
+// 	</script>");
+
+// Mengambil pesan kesalahan dari session, lalu menghapusnya agar hanya tampil sekali.
+$galatKegiatan = $_SESSION["galat"]["kegiatan"] ?? "";
+$galatKontak = $_SESSION["galat"]["kontak"] ?? "";
+unset($_SESSION["galat"]);
 
 // Mengamankan data sebelum ditampilkan kembali ke halaman HTML.
 // P6: PHP dasar dan pemrograman sisi peladen
@@ -240,19 +370,19 @@ switch ($programStudi) {
 					<textarea class="input-form" id="deskripsikegiatan" name="deskripsikegiatan" maxlength="300" placeholder="Tulis pesan Anda" required></textarea>
 				</div>
 
+				<p class="<?= $galatKegiatan !== "" ? "form-feedback-error" : "form-feedback" ?>" data-form-feedback aria-live="polite"><?= bersihkan($galatKegiatan) ?></p>
 				<button type="submit">Kirim</button>
 				<button type="reset">Batal</button>
-				<p class="form-feedback" data-form-feedback aria-live="polite"></p>
 			</form>
 
-			<?php if (isset($_SESSION["namakegiatan"])): ?>
+			<?php if (isset($_SESSION["kegiatan"])): ?>
 				<article id="hasilRencanakegiatan" class="submission-result" aria-live="polite">
 					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Kegiatan:</strong> <?= htmlspecialchars($_SESSION["namakegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Kategori Kegiatan:</strong> <?= htmlspecialchars($_SESSION["kategorikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Tanggal Pelaksanaan:</strong> <?= htmlspecialchars($_SESSION["tanggalpelaksanaan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Lokasi Kegiatan:</strong> <?= htmlspecialchars($_SESSION["lokasikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
-					<p><strong>Deskripsi Kegiatan:</strong> <?= htmlspecialchars($_SESSION["deskripsikegiatan"] ?? "", ENT_QUOTES, "UTF-8") ?></p>
+					<p><strong>Nama Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["namakegiatan"]) ?></p>
+					<p><strong>Kategori Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["kategorikegiatan"]) ?></p>
+					<p><strong>Tanggal Pelaksanaan:</strong> <?= bersihkan($_SESSION["kegiatan"]["tanggalpelaksanaan"]) ?></p>
+					<p><strong>Lokasi Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["lokasikegiatan"]) ?></p>
+					<p><strong>Deskripsi Kegiatan:</strong> <?= nl2br(bersihkan($_SESSION["kegiatan"]["deskripsikegiatan"])) ?></p>
 				</article>
 			<?php endif; ?>
 		</section>
@@ -342,24 +472,24 @@ switch ($programStudi) {
 						required></textarea>
 				</div>
 
+				<p class="<?= $galatKontak !== "" ? "form-feedback-error" : "form-feedback" ?>" data-form-feedback aria-live="polite"><?= bersihkan($galatKontak) ?></p>
 				<button type="submit">Kirim</button>
 				<button type="reset">Batal</button>
-				<p class="form-feedback" data-form-feedback aria-live="polite"></p>
 			</form>
 
-			<?php if (isset($_SESSION["nama"])): ?>
+			<?php if (isset($_SESSION["kontak"])): ?>
 				<article id="hasilKontak" class="submission-result" aria-live="polite">
 					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Lengkap:</strong> <?= bersihkan($_SESSION["nama"]) ?></p>
-					<p><strong>Email:</strong> <?= bersihkan($_SESSION["email"]) ?></p>
-					<p><strong>Semester:</strong> <?= bersihkan($_SESSION["semester"]) ?></p>
-					<p><strong>Tanggal Kunjungan:</strong> <?= bersihkan($_SESSION["tanggal"]) ?></p>
-					<p><strong>Jenis Pesan:</strong> <?= bersihkan($_SESSION["jenis_pesan"]) ?></p>
+					<p><strong>Nama Lengkap:</strong> <?= bersihkan($_SESSION["kontak"]["nama"]) ?></p>
+					<p><strong>Email:</strong> <?= bersihkan($_SESSION["kontak"]["email"]) ?></p>
+					<p><strong>Semester:</strong> <?= bersihkan($_SESSION["kontak"]["semester"]) ?></p>
+					<p><strong>Tanggal Kunjungan:</strong> <?= bersihkan($_SESSION["kontak"]["tanggal"]) ?></p>
+					<p><strong>Jenis Pesan:</strong> <?= bersihkan($_SESSION["kontak"]["jenis_pesan"]) ?></p>
 					<p><strong>Topik yang Diminati:</strong>
-						<?= bersihkan(implode(", ", $_SESSION["minat"])) ?>
+						<?= bersihkan(implode(", ", $_SESSION["kontak"]["minat"])) ?>
 					</p>
-					<p><strong>Program Studi:</strong> <?= bersihkan($_SESSION["prodi"]) ?></p>
-					<p><strong>Pesan:</strong> <?= nl2br(bersihkan($_SESSION["pesan"])) ?></p>
+					<p><strong>Program Studi:</strong> <?= bersihkan($_SESSION["kontak"]["prodi"]) ?></p>
+					<p><strong>Pesan:</strong> <?= nl2br(bersihkan($_SESSION["kontak"]["pesan"])) ?></p>
 				</article>
 			<?php endif; ?>
 		</section>
