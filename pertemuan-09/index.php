@@ -3,6 +3,16 @@ session_start();
 
 include("fungsi.php");
 
+// echo "<h1>hai disana</h1>";
+// echo "<script>
+// 	alert('hai');
+// 	</script>";
+
+// echo bersihkan("<p>hai disana</p>");
+// echo bersihkan("<script>
+// 	alert('hai');
+// 	</script>");
+
 // Mengambil nilai teks dari $_POST (selalu string dan sudah di-trim).
 function ambilTeks(string $kunci): string
 {
@@ -15,6 +25,78 @@ function tanggalValid(string $tanggal): bool
 {
 	$d = DateTime::createFromFormat("Y-m-d", $tanggal);
 	return $d !== false && $d->format("Y-m-d") === $tanggal;
+}
+
+// ---------------------------------------------------------------
+// P7/P8/P9: Memproses data formulir dan menyimpannya ke dalam session.
+//   $_SESSION["kegiatan"]         = data Rencana Kegiatan yang valid (array)
+//   $_SESSION["kontak"]           = data Kontak yang valid (array)
+//   $_SESSION["galat"]["kegiatan"] / ["kontak"] = pesan kesalahan (sekali tampil)
+// ---------------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+	// Menentukan formulir mana yang dikirim melalui input tersembunyi "form_type".
+	$formType = ambilTeks("form_type");
+	$anchor = "home";
+
+	if ($formType === "rencanakegiatan") {
+		// Formulir Rencana Kegiatan: hanya memproses data kegiatan.
+		$data = [
+			"namakegiatan"       => ambilTeks("namakegiatan"),
+			"kategorikegiatan"   => ambilTeks("kategorikegiatan"),
+			"tanggalpelaksanaan" => ambilTeks("tanggalpelaksanaan"),
+			"lokasikegiatan"     => ambilTeks("lokasikegiatan"),
+			"deskripsikegiatan"  => ambilTeks("deskripsikegiatan"),
+		];
+
+		$galat = validasiRencanaKegiatan($data);
+
+		if ($galat === "") {
+			$_SESSION["kegiatan"] = $data;
+			unset($_SESSION["galat"]["kegiatan"]);
+		} else {
+			$_SESSION["galat"]["kegiatan"] = $galat;
+		}
+
+		$anchor = "rencanakegiatan";
+	} elseif ($formType === "contact") {
+		// Formulir Kontak: hanya memproses data kontak.
+		$minat = $_POST["minat"] ?? [];
+
+		// Checkbox dapat mengirimkan lebih dari satu nilai.
+		if (!is_array($minat)) {
+			$minat = [];
+		}
+		$minat = array_values(array_filter(array_map(
+			static fn($m) => is_scalar($m) ? trim((string) $m) : "",
+			$minat
+		), static fn($m) => $m !== ""));
+
+		$data = [
+			"nama"        => ambilTeks("nama"),
+			"email"       => ambilTeks("email"),
+			"semester"    => ambilTeks("semester"),
+			"tanggal"     => ambilTeks("tanggal"),
+			"jenis_pesan" => ambilTeks("jenis_pesan"),
+			"minat"       => $minat,
+			"prodi"       => ambilTeks("prodi"),
+			"pesan"       => ambilTeks("pesan"),
+		];
+
+		$galat = validasiKontak($data);
+
+		if ($galat === "") {
+			$_SESSION["kontak"] = $data;
+			unset($_SESSION["galat"]["kontak"]);
+		} else {
+			$_SESSION["galat"]["kontak"] = $galat;
+		}
+
+		$anchor = "contact";
+	}
+
+	// PRG: mencegah pengiriman POST berulang ketika halaman dimuat ulang.
+	header("Location: index.php#" . $anchor);
+	exit;
 }
 
 // Validasi sisi peladen PHP
@@ -96,88 +178,6 @@ function validasiKontak(array $data): string
 	return "";
 }
 
-// ---------------------------------------------------------------
-// P7/P8/P9: Memproses data formulir dan menyimpannya ke dalam session.
-//   $_SESSION["kegiatan"]         = data Rencana Kegiatan yang valid (array)
-//   $_SESSION["kontak"]           = data Kontak yang valid (array)
-//   $_SESSION["galat"]["kegiatan"] / ["kontak"] = pesan kesalahan (sekali tampil)
-// ---------------------------------------------------------------
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-	// Menentukan formulir mana yang dikirim melalui input tersembunyi "form_type".
-	$formType = ambilTeks("form_type");
-	$anchor = "home";
-
-	if ($formType === "rencanakegiatan") {
-		// Formulir Rencana Kegiatan: hanya memproses data kegiatan.
-		$data = [
-			"namakegiatan"       => ambilTeks("namakegiatan"),
-			"kategorikegiatan"   => ambilTeks("kategorikegiatan"),
-			"tanggalpelaksanaan" => ambilTeks("tanggalpelaksanaan"),
-			"lokasikegiatan"     => ambilTeks("lokasikegiatan"),
-			"deskripsikegiatan"  => ambilTeks("deskripsikegiatan"),
-		];
-
-		$galat = validasiRencanaKegiatan($data);
-
-		if ($galat === "") {
-			$_SESSION["kegiatan"] = $data;
-			unset($_SESSION["galat"]["kegiatan"]);
-		} else {
-			$_SESSION["galat"]["kegiatan"] = $galat;
-		}
-
-		$anchor = "rencanakegiatan";
-	} elseif ($formType === "contact") {
-		// Formulir Kontak: hanya memproses data kontak.
-		$minat = $_POST["minat"] ?? [];
-
-		// Checkbox dapat mengirimkan lebih dari satu nilai.
-		if (!is_array($minat)) {
-			$minat = [];
-		}
-		$minat = array_values(array_filter(array_map(
-			static fn($m) => is_scalar($m) ? trim((string) $m) : "",
-			$minat
-		), static fn($m) => $m !== ""));
-
-		$data = [
-			"nama"        => ambilTeks("nama"),
-			"email"       => ambilTeks("email"),
-			"semester"    => ambilTeks("semester"),
-			"tanggal"     => ambilTeks("tanggal"),
-			"jenis_pesan" => ambilTeks("jenis_pesan"),
-			"minat"       => $minat,
-			"prodi"       => ambilTeks("prodi"),
-			"pesan"       => ambilTeks("pesan"),
-		];
-
-		$galat = validasiKontak($data);
-
-		if ($galat === "") {
-			$_SESSION["kontak"] = $data;
-			unset($_SESSION["galat"]["kontak"]);
-		} else {
-			$_SESSION["galat"]["kontak"] = $galat;
-		}
-
-		$anchor = "contact";
-	}
-
-	// PRG: mencegah pengiriman POST berulang ketika halaman dimuat ulang.
-	header("Location: index.php#" . $anchor);
-	exit;
-}
-
-// echo "<h1>hai disana</h1>";
-// echo "<script>
-// 	alert('hai');
-// 	</script>";
-
-// echo bersihkan("<p>hai disana</p>");
-// echo bersihkan("<script>
-// 	alert('hai');
-// 	</script>");
-
 // Mengambil pesan kesalahan dari session, lalu menghapusnya agar hanya tampil sekali.
 $galatKegiatan = $_SESSION["galat"]["kegiatan"] ?? "";
 $galatKontak = $_SESSION["galat"]["kontak"] ?? "";
@@ -226,6 +226,26 @@ switch ($programStudi) {
 	default:
 		$fokusProgramStudi = "Belum ditentukan";
 }
+
+// Bagian 5: Array label untuk menampilkan hasil formulir dengan foreach
+$labelKegiatan = [
+	"namakegiatan"       => "Nama Kegiatan",
+	"kategorikegiatan"   => "Kategori Kegiatan",
+	"tanggalpelaksanaan" => "Tanggal Pelaksanaan",
+	"lokasikegiatan"     => "Lokasi Kegiatan",
+	"deskripsikegiatan"  => "Deskripsi Kegiatan",
+];
+ 
+$labelKontak = [
+	"nama"        => "Nama Lengkap",
+	"email"       => "Email",
+	"semester"    => "Semester",
+	"tanggal"     => "Tanggal Kunjungan",
+	"jenis_pesan" => "Jenis Pesan",
+	"minat"       => "Topik yang Diminati",
+	"prodi"       => "Program Studi",
+	"pesan"       => "Pesan",
+];
 ?>
 <!doctype html>
 <html lang="id">
@@ -378,11 +398,13 @@ switch ($programStudi) {
 			<?php if (isset($_SESSION["kegiatan"])): ?>
 				<article id="hasilRencanakegiatan" class="submission-result" aria-live="polite">
 					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["namakegiatan"]) ?></p>
-					<p><strong>Kategori Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["kategorikegiatan"]) ?></p>
-					<p><strong>Tanggal Pelaksanaan:</strong> <?= bersihkan($_SESSION["kegiatan"]["tanggalpelaksanaan"]) ?></p>
-					<p><strong>Lokasi Kegiatan:</strong> <?= bersihkan($_SESSION["kegiatan"]["lokasikegiatan"]) ?></p>
-					<p><strong>Deskripsi Kegiatan:</strong> <?= nl2br(bersihkan($_SESSION["kegiatan"]["deskripsikegiatan"])) ?></p>
+					<?php foreach ($labelKegiatan as $kunci => $label): ?>
+						<?php $nilai = $_SESSION["kegiatan"][$kunci] ?? ""; ?>
+						<p>
+							<strong><?= $label ?>:</strong>
+							<?= $kunci === "deskripsikegiatan" ? nl2br(bersihkan($nilai)) : bersihkan($nilai) ?>
+						</p>
+					<?php endforeach; ?>
 				</article>
 			<?php endif; ?>
 		</section>
@@ -480,16 +502,18 @@ switch ($programStudi) {
 			<?php if (isset($_SESSION["kontak"])): ?>
 				<article id="hasilKontak" class="submission-result" aria-live="polite">
 					<h3>Data Formulir yang Dikirim</h3>
-					<p><strong>Nama Lengkap:</strong> <?= bersihkan($_SESSION["kontak"]["nama"]) ?></p>
-					<p><strong>Email:</strong> <?= bersihkan($_SESSION["kontak"]["email"]) ?></p>
-					<p><strong>Semester:</strong> <?= bersihkan($_SESSION["kontak"]["semester"]) ?></p>
-					<p><strong>Tanggal Kunjungan:</strong> <?= bersihkan($_SESSION["kontak"]["tanggal"]) ?></p>
-					<p><strong>Jenis Pesan:</strong> <?= bersihkan($_SESSION["kontak"]["jenis_pesan"]) ?></p>
-					<p><strong>Topik yang Diminati:</strong>
-						<?= bersihkan(implode(", ", $_SESSION["kontak"]["minat"])) ?>
-					</p>
-					<p><strong>Program Studi:</strong> <?= bersihkan($_SESSION["kontak"]["prodi"]) ?></p>
-					<p><strong>Pesan:</strong> <?= nl2br(bersihkan($_SESSION["kontak"]["pesan"])) ?></p>
+					<?php foreach ($labelKontak as $kunci => $label): ?>
+						<?php
+						$nilai = $_SESSION["kontak"][$kunci] ?? "";
+						if (is_array($nilai)) {
+							$nilai = implode(", ", $nilai); // untuk "minat" (checkbox)
+						}
+						?>
+						<p>
+							<strong><?= $label ?>:</strong>
+							<?= $kunci === "pesan" ? nl2br(bersihkan($nilai)) : bersihkan($nilai) ?>
+						</p>
+					<?php endforeach; ?>
 				</article>
 			<?php endif; ?>
 		</section>
