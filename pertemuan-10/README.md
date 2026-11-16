@@ -18,4 +18,4 @@ Pada P10, yang saya lakukan adalah:
 14. Memeriksa dan memperbaiki data awal tabel kontak, pengujian: Memastikan seluruh data pada tabel sesuai dengan ketentuan atribut dan nilai yang digunakan pada formulir P9
 15. Menentukan pengaturan ekspor basis data, pengujian: Memastikan basis data `db_pwd_2611500009` telah dipilih dan pengaturan ekspor menggunakan metode Quick serta format SQL
 16. Mengekspor basis data ke berkas SQL, pengujian: Memastikan berkas `db_pwd_2611500009.sql` berhasil diunduh dan telah ditempatkan pada direktori `pertemuan-10`
-17. 
+17. Memeriksa kelengkapan berkas ekspor SQL, pengujian: Memastikan berkas SQL memuat struktur tabel `db_pwd_2611500009` dan data awal yang telah dimasukkan, dan memeriksa kesesuaian nama tabel, sembilan atribut, serta nilai data yang diekspor
