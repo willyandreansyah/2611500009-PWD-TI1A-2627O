@@ -14,4 +14,5 @@ Pada P10, yang saya lakukan adalah:
 10. Memeriksa rancangan akhir struktur tabel kontak, pengujian: Memeriksa kembali rancangan sembilan atribut yang telah dibuat, dan memastikan seluruh data formulir P9 telah terwakili, tipe data sesuai dengan karakteristik masing-masing atribut, dan hanya atribut id yang ditetapkan sebagai PRIMARY KEY dengan AUTO_INCREMENT
 11. Memasukkan data awal ke tabel kontak, pengujian: Memastikan data berhasil dimasukkan tanpa pesan kesalahan, dan memeriksa kembali nilai yang diisikan pada setiap atribut dan pastikan id terbentuk secara otomatis
 12. Mempelajari perintah SQL insert, pengujian: Memperhatikan hubungan antara perintah INSERT dan atribut tabel yang telah dibuat pada SQL Insert, dan memastikan data berhasil ditambahkan
-13. 
+13. Memeriksa data awal pada tabel kontak, pengujian: Memastikan data yang ditampilkan pada tab Browse sesuai dengan data yang dimasukkan sebelumnnya (ada dua data yang dimasukkan pertama menggunakan `Insert` kedua menggunakan `SQL Insert`), dan memeriksa setiap atribut dan memastikan tidak terdapat data yang hilang atau berubah secara tidak disengaja
+14. 
