@@ -11,4 +11,5 @@ Pada P10, yang saya lakukan adalah:
 7. Menentukan nama basis data dan tabel P10, pengujian: Memeriksa penulisan nama basis data dan tabel berdasarkan NIM masing-masing `(NIM saya sendiri: 2611500009)`, dan memastikan kedua nama mengikuti pola yang telah ditentukan `(nama basis data: db_pwd_2611500009 dan nama tabel: tbl_kontak_2611500009)`
 8. Merancang atribut dan tipe data tabel kontak, pengujian: Memeriksa kembali delapan atribut dan tipe data yang telah ditentukan, dan memastikan nama atribut sesuai dengan data formulir P9 dan ukuran tipe data sesuai dengan batasan input yang digunakan
 9. Menentukan primary key dan auto increment tabel kontak, pengujian: Memastikan atribut id telah ditambahkan pada rancangan tabel dengan tipe data INT, ditetapkan sebagai PRIMARY KEY dan menggunakan AUTO_INCREMENT
-10. 
+10. Memeriksa rancangan akhir struktur tabel kontak, pengujian: Memeriksa kembali rancangan sembilan atribut yang telah dibuat, dan memastikan seluruh data formulir P9 telah terwakili, tipe data sesuai dengan karakteristik masing-masing atribut, dan hanya atribut id yang ditetapkan sebagai PRIMARY KEY dengan AUTO_INCREMENT
+11. 
