@@ -16,4 +16,4 @@ Pada P10, yang saya lakukan adalah:
 12. Mempelajari perintah SQL insert, pengujian: Memperhatikan hubungan antara perintah INSERT dan atribut tabel yang telah dibuat pada SQL Insert, dan memastikan data berhasil ditambahkan
 13. Memeriksa data awal pada tabel kontak, pengujian: Memastikan data yang ditampilkan pada tab Browse sesuai dengan data yang dimasukkan sebelumnnya (ada dua data yang dimasukkan pertama menggunakan `Insert` kedua menggunakan `SQL Insert`), dan memeriksa setiap atribut dan memastikan tidak terdapat data yang hilang atau berubah secara tidak disengaja
 14. Memeriksa dan memperbaiki data awal tabel kontak, pengujian: Memastikan seluruh data pada tabel sesuai dengan ketentuan atribut dan nilai yang digunakan pada formulir P9
-15. 
+15. Menentukan pengaturan ekspor basis data, pengujian: Memastikan basis data `db_pwd_2611500009` telah dipilih dan pengaturan ekspor menggunakan metode Quick serta format SQL
