@@ -7,3 +7,4 @@ Pada P10, yang saya lakukan adalah:
 3. Memeriksa kesiapan phpMyAdmin dan repositori pertemuan 10, pengujian: Memastikan phpMyAdmin dapat dibuka dan menampilkan antarmuka pengelolaan basis data MySQL
 4. Mengidentifikasi kebutuhan data formulir kontak P10, pengujian: Memeriksa kembali bagian formulir pada  `pertemuan-10\index.php`, dan memastikan kedelapan data tersebut sesuai dengan atribut name dan jenis input yang tersedia pada kode
 5. Menentukan data formulir yang akan disimpan ke basis data, pengujian: Mencocokkan delapan data yang akan disimpan dengan elemen formulir pada `pertemuan-10\index.php`, dan memastikan tidak ada informasi profil yang dimasukkan sebagai bagian dari data formulir kontak
+6. Menentukan representasi data pilihan minat, pengujian: Memeriksa kembali kode formulir pada `pertemuan-10\index.php`, dan memastikan kedua checkbox menggunakan atribut `name="minat[]"` dan memiliki nilai HTML serta CSS
