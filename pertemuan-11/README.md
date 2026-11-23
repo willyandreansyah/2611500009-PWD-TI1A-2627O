@@ -19,4 +19,5 @@ Pada P11, yang saya lakukan adalah:
 15. Menjalankan kueri SELECT menggunakan MySQLi, pengujian: Memastikan fungsi `mysqli_query()` menggunakan variabel `$koneksi` dan berkas `koneksi.php` dan variabel `sql` yang telah ditentukan
 16. Menambahkan pemeriksaan kegagalan kueri SELECT, pengujian: Mengubah sementara nama tabel pada variabel `$sql` menjadi `tbl_kontak_tidak_tersedia`, kemudian akses aplikasi melalui `http://localhost/PWD/2627o/ti1a/2611500009-PWD-TI1A-2627O/pertemuan-11/`. Memastikan pesan `Kueri SELECT gagal dijalankan` dapat ditampilkan. Setelah pengujian, kembalikan nama tabel menjadi `tbl_kontak_2611500009`
 17. Mengambil hasil SELECT menggunakan `mysqli_fetch_assoc`, pengujian: memastikan kode dapat mengambil seluruh baris hasil kueri dan menyimpannya ke dalam `$datakontak`
-18. 
+18. Memeriksa hasil pengambilan data kontak, pengujian: Melakukan pemeriksaan sementara menggunakan `var_dump()` dan memeriksa hasil keluaran `var_dump()` untuk memastikan `$datakontak` berisi data hasil kueri. Setelah pengujian, hapus kode `var_dump()` agar tidak menjadi bagian dari keluaran aplikasi
+19. 
