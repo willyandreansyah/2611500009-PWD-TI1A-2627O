@@ -14,4 +14,5 @@ Pada P11, yang saya lakukan adalah:
 10. Menyiapkan pemuatan berkas koneksi pada P11, pengujian: Memeriksa kembali nama berkas dan penulisan perintah `require_once("koneksi.php");` dan memastikan `koneksi.php` telah tersedia pada direktori yang sama dengan `index.php`
 11. Mengintegrasikan berkas koneksi pada index P11, pengujian: Memeriksa bagian awal `index.php` dan memastikan kedua berkas dimuat menggunakan `require_once()` dan tidak terdapat kesalahan penulisan nama berkas
 12. Memeriksa alur ketersediaan koneksi pada index P11, pengujian: Memeriksa alur kode pada kedua berkas dan memastikan `index.php` memuat `koneksi.php` sebelum bagian kode yang membutuhkan variabel `$koneksi`. Memastikan pula pemeriksaan kegagalan koneksi tetap berada di dalam `koneksi.php`
-13. 
+13.  Menguji integrasi koneksi PHP - MySQL pada index P11, pengujian: Memastikan halaman utama dapat diakses tanpa menampilkan pesan `Koneksi ke basis data gagal`
+14. 
