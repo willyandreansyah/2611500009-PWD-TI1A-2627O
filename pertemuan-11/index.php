@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include("fungsi.php");
+require_once("fungsi.php");
+require_once("koneksi.php");
 
 // echo "<h1>hai disana</h1>";
 // echo "<script>
