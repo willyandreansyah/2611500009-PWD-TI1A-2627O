@@ -17,4 +17,4 @@ Pada P11, yang saya lakukan adalah:
 13. Menguji integrasi koneksi PHP - MySQL pada index P11, pengujian: Memastikan halaman utama dapat diakses tanpa menampilkan pesan `Koneksi ke basis data gagal`
 14. Menentukan kueri SELECT data kontak, pengujian: Memeriksa kembali nama tabel pada kueri dan pastikan tabel `tbl_kontak_2611500009` tersedia pada basis data `db_pwd_2611500009` melalui PhpMyAdmin
 15. Menjalankan kueri SELECT menggunakan MySQLi, pengujian: Memastikan fungsi `mysqli_query()` menggunakan variabel `$koneksi` dan berkas `koneksi.php` dan variabel `sql` yang telah ditentukan
-16. 
+16. Menambahkan pemeriksaan kegagalan kueri SELECT, pengujian: Mengubah sementara nama tabel pada variabel `$sql` menjadi `tbl_kontak_tidak_tersedia`, kemudian akses aplikasi melalui `http://localhost/PWD/2627o/ti1a/2611500009-PWD-TI1A-2627O/pertemuan-11/`. Memastikan pesan `Kueri SELECT gagal dijalankan` dapat ditampilkan. Setelah pengujian, kembalikan nama tabel menjadi `tbl_kontak_2611500009`

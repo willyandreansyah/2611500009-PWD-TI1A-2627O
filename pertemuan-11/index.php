@@ -10,6 +10,11 @@ require_once("koneksi.php");
 $sql = "SELECT * FROM tbl_kontak_2611500009";
 $hasil = mysqli_query($koneksi, $sql);
 
+// P11: Memeriksa keberhasilan kueri SELECT.
+if (!$hasil) {
+	die("Kueri SELECT gagal dijalankan.");
+}
+
 // echo "<h1>hai disana</h1>";
 // echo "<script>
 // 	alert('hai');
@@ -242,7 +247,7 @@ $labelKegiatan = [
 	"lokasikegiatan"     => "Lokasi Kegiatan",
 	"deskripsikegiatan"  => "Deskripsi Kegiatan",
 ];
- 
+
 $labelKontak = [
 	"nama"        => "Nama Lengkap",
 	"email"       => "Email",
