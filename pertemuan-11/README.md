@@ -9,4 +9,5 @@ Pada P11, yang saya lakukan adalah:
 5. Menentukan parameter koneksi basis data P11, pengujian: Memeriksa keempat parameter pada berkas `koneksi.php` dan memastikan nama basis data sesuai dengan yang telah dibuat pada P10 dan tidak terdapat kesalahan penulisan
 6. Mengatur pelaporan kesalahan MySQLi P11, pengujian: Memastikan pemanggilan `mysqli_report(MYSQLI_REPORT_OFF);` telah ditulis setelah deklarasi parameter koneksi, dan memeriksa kembali nama fungsi dan konstanta yang digunakan
 7. Mengimplementasikan koneksi PHP - MySQL menggunakan MySQLi, pengujian: Memeriksa kembali isi berkas `koneksi.php` dan memastikan parameter koneksi, pemanggilan `mysqli_report()`, fungsi `mysqli_connect()`, dan memeriksa kegagalan koneksi telah ditulis sesuai urutan.
-8. 
+8. Menguji koneksi dari PHP ke MySQL dengan file sementara bernama `uji_koneksi.php`, pengujian: Memastikan halaman menampilkan pesan `Koneksi ke basis data berhasil` dan setelah pengujian selesai hapus berkas sementara `uji_koneksi.php` agar tidak menjadi bagian dari artefak akhir P11
+9. 
