@@ -16,4 +16,5 @@ Pada P11, yang saya lakukan adalah:
 12. Memeriksa alur ketersediaan koneksi pada index P11, pengujian: Memeriksa alur kode pada kedua berkas dan memastikan `index.php` memuat `koneksi.php` sebelum bagian kode yang membutuhkan variabel `$koneksi`. Memastikan pula pemeriksaan kegagalan koneksi tetap berada di dalam `koneksi.php`
 13. Menguji integrasi koneksi PHP - MySQL pada index P11, pengujian: Memastikan halaman utama dapat diakses tanpa menampilkan pesan `Koneksi ke basis data gagal`
 14. Menentukan kueri SELECT data kontak, pengujian: Memeriksa kembali nama tabel pada kueri dan pastikan tabel `tbl_kontak_2611500009` tersedia pada basis data `db_pwd_2611500009` melalui PhpMyAdmin
-15. 
+15. Menjalankan kueri SELECT menggunakan MySQLi, pengujian: Memastikan fungsi `mysqli_query()` menggunakan variabel `$koneksi` dan berkas `koneksi.php` dan variabel `sql` yang telah ditentukan
+16. 
