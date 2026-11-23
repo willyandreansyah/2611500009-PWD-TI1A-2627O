@@ -6,6 +6,9 @@ require_once("fungsi.php"); #Penggunaan require_once() memastikan berkas tersebu
 #P11
 require_once("koneksi.php");
 
+// P11: Mengambil data kontak dari basis data menggunakan operasi READ.
+$sql = "SELECT * FROM tbl_kontak_2611500009";
+
 // echo "<h1>hai disana</h1>";
 // echo "<script>
 // 	alert('hai');
