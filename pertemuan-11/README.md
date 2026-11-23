@@ -12,4 +12,5 @@ Pada P11, yang saya lakukan adalah:
 8. Menguji koneksi dari PHP ke MySQL dengan file sementara bernama `uji_koneksi.php`, pengujian: Memastikan halaman menampilkan pesan `Koneksi ke basis data berhasil` dan setelah pengujian selesai hapus berkas sementara `uji_koneksi.php` agar tidak menjadi bagian dari artefak akhir P11
 9. Menguji penanganan kegagalan koneksi PHP - MySQL, pengujian: Memastikan kondisi kegagalan koneksi dapat diamati dan pesan yang ditampilkan sesuai dengan kode. Setelah itu, kembalikan parameter `$database` ke nama basis data yang benar. Mengakses kembali `koneksi.php` untuk memeriksa bahwa pesan kegagalan tidak lagi muncul
 10. Menyiapkan pemuatan berkas koneksi pada P11, pengujian: Memeriksa kembali nama berkas dan penulisan perintah `require_once("koneksi.php");` dan memastikan `koneksi.php` telah tersedia pada direktori yang sama dengan `index.php`
-11. 
+11. Mengintegrasikan berkas koneksi pada index P11, pengujian: Memeriksa bagian awal `index.php` dan memastikan kedua berkas dimuat menggunakan `require_once()` dan tidak terdapat kesalahan penulisan nama berkas
+12. 
